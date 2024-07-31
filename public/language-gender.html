@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Language Gender Experiment</title>
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.2.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+  <style>
+    .start-para {
+      display: block;
+      align-self: center;
+      align-items: center;
+      width: 50%;
+      margin-left: 25%;
+    }
+
+    .start-button{
+      width:5.75rem;
+      margin: 0;
+      background-color: black;
+      color: white;
+
+    }
+
+    .start-button:hover{
+      background-color: white;
+      color: black;
+      border-color: black;
+    }
+
+    .choice-button{
+      margin:0;
+      height: 3rem;
+      width:max-content;
+      font-size: medium;
+    }
+    
+
+  </style>
+</head>
+
+<body></body>
+
+<script>
+  
+    var jsPsych = initJsPsych({
+    show_progress_bar: true, // Enable progress bar
+    auto_update_progress_bar: true, // Automatically update progress bar
+  });
+
+  function sendtoServer(data){
+      fetch('/submit-data', {
+    method: 'POST', // Specifies that we are making a POST request
+    headers: {
+      'Content-Type': 'application/json' // Sets the Content-Type header to 'application/json', indicating that the body of the request contains JSON data
+    },
+    body: data // The data collected from the jsPsych experiment, in JSON format
+  }).then(response => {
+    if (response.ok) { // Checks if the response from the server is OK (status code 200-299)
+      alert('Data saved successfully'); // If the response is OK, display an alert to the user
+    } else {
+      alert('Failed to save data'); // If the response is not OK, display an error alert to the user
+    }
+  });
+  }
+
+  /* create timeline */
+  var timeline = [];
+
+  /* preload images */
+  var preload = {
+    type: jsPsychPreload,
+    images: [
+      'img/table.jpg', 'img/cruise-ship.png', 'img/sun.jpg', 'img/moon.jpg',
+      'img/bridge.webp', 'img/car.jpg', 'img/cat.jpeg', 'img/chair.jpg',
+      'img/clock.jpg', 'img/cup.jpg', 'img/dog.jpg', 'img/flower.jpeg',
+      'img/house.jpg', 'img/pen.jpg', 'img/tree.jpeg', 'img/window.JPG'
+    ],
+  };
+  timeline.push(preload);
+
+  /* define trial stimuli array for timeline variables */
+  var test_stimuli = [
+    { stimulus: "img/table.jpg", prompt: 'Table' },
+    { stimulus: "img/cruise-ship.png", prompt: 'Cruise Ship' },
+    { stimulus: "img/sun.jpg", prompt: 'Sun' },
+    { stimulus: "img/moon.jpg", prompt: 'Moon' },
+    { stimulus: "img/car.jpg", prompt: 'Car' },
+    { stimulus: "img/cat.jpeg", prompt: 'Cat' },
+    { stimulus: "img/chair.jpg", prompt: 'Chair' },
+    { stimulus: "img/clock.jpg", prompt: 'Clock' },
+    { stimulus: "img/cup.jpg", prompt: 'Cup' },
+    { stimulus: "img/dog.jpg", prompt: 'Dog' },
+    { stimulus: "img/flower.jpeg", prompt: 'Flower' },
+    { stimulus: "img/house.jpg", prompt: 'House' },
+    { stimulus: "img/pen.jpg", prompt: 'Pen' },
+    { stimulus: "img/tree.jpeg", prompt: 'Tree' },
+    { stimulus: "img/window.JPG", prompt: 'Window' }
+  ];
+
+  var languageGenders = {
+    "English": ["Masculine", "Feminine", "Neuter"],
+    "French": ["Masculine", "Feminine"],
+    "Arabic": ["Masculine", "Feminine"],
+    "Urdu": ["Masculine", "Feminine"]
+  };
+
+  var languageSelected = "None";
+
+  /* define instructions trial */
+  function startMenu() {
+    var instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p class="start-para">In this experiment, you will be shown various objects and asked to select their language gender. Please read the instructions carefully and select the appropriate gender for each object. Thank you for participating!</p>
+        <div>
+          <select name="languages" class="jspsych-btn" id="languages">
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Urdu">Urdu</option>
+          </select>
+        </div>
+      `,
+      choices: ['Start'],
+      button_html: ['<button class="jspsych-btn start-button" id="start-btn">%choice%</button>'],
+      on_load: function() {
+        document.getElementById('start-btn').addEventListener('click', function() {
+          languageSelected = document.getElementById('languages').value;
+          document.body.innerHTML = ''; // Clear the instructions from the body
+          var viewportHeight = window.innerWidth;
+          if(viewportHeight < 768){
+            var height = viewportHeight / 2;
+            console.log(height);
+          }
+          else{
+            height=300
+          }
+         
+          
+          
+          // Create and display the questions
+          function CreateAndDisplayQuestion() {
+            var languageGenderArray = languageGenders[languageSelected];
+            var question = {
+              type: jsPsychImageButtonResponse,
+              stimulus: jsPsych.timelineVariable('stimulus'),
+              stimulus_height: height,
+              choices: languageGenderArray.concat([`Don't Know`]),
+              prompt: jsPsych.timelineVariable('prompt'),
+              button_html: languageGenderArray.concat(['None']).map(choice => `
+              <div>
+              <button class="jspsych-btn choice-button">%choice%</button>
+              <p></p>
+              <p></p>
+              </div>
+              `),
+              data: {
+                selected_gender: "Male",
+                choices: languageGenderArray.concat(['None'])
+              },
+
+              on_finish: function(data) {
+                data.selected_gender = data.choices[data.response];
+              }
+            };
+
+            var question_timeline = {
+              timeline: [question],
+              timeline_variables: test_stimuli
+            };
+            timeline.push(question_timeline);
+          }
+
+          // Clear timeline and run the experiment
+          timeline = [preload];
+          CreateAndDisplayQuestion();
+          jsPsych = initJsPsych({
+            show_progress_bar: true, // Enable progress bar
+            auto_update_progress_bar: true, // Automatically update progress bar
+            on_finish: function() {
+            jsPsych.data.displayData();
+            console.log(jsPsych.data.get().json())
+            sendtoServer(jsPsych.data.get().json());
+            
+    }
+  })
+
+          jsPsych.run(timeline);
+        });
+      }
+    };
+
+    jsPsych.run([instructions]);
+  }
+
+  startMenu();
+</script>
+
+</html>

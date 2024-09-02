@@ -1,0 +1,22 @@
+{
+  "English": ["Masculine", "Feminine", "Neuter"],
+  "French": ["Masculine", "Feminine"],
+  "Arabic": ["Masculine", "Feminine"],
+  "Hindi": ["Masculine", "Feminine", "Neuter"],
+  "Spanish": ["Masculine", "Feminine"],
+  "Portuguese": ["Masculine", "Feminine"],
+  "Russian": ["Masculine", "Feminine", "Neuter"],
+  "German": ["Masculine", "Feminine", "Neuter"],
+  "Italian": ["Masculine", "Feminine"],
+  "Polish": ["Masculine", "Feminine", "Neuter"],
+  "Greek": ["Masculine", "Feminine", "Neuter"],
+  "Hebrew": ["Masculine", "Feminine"],
+  "Persian": ["Masculine", "Feminine"],
+  "Romanian": ["Masculine", "Feminine", "Neuter"],
+  "Serbo-Croatian": ["Masculine", "Feminine", "Neuter"],
+  "Ukrainian": ["Masculine", "Feminine", "Neuter"],
+  "Czech": ["Masculine", "Feminine", "Neuter"],
+  "Dutch": ["Masculine", "Feminine", "Neuter"],
+  "Slovak": ["Masculine", "Feminine", "Neuter"],
+  "Swahili": ["Masculine", "Feminine"]
+}

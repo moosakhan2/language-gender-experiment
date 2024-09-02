@@ -11,50 +11,60 @@
   <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
   <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" type="text/css" />
 
-  <style>
-    .start-para {
-      display: block;
-      align-self: center;
-      align-items: center;
-      width: 50%;
-      margin-left: 25%;
-    }
-
-    .start-button{
-      width:5.75rem;
-      margin: 0;
-      background-color: black;
-      color: white;
-
-    }
-
-    .start-button:hover{
-      background-color: white;
-      color: black;
-      border-color: black;
-    }
-
-    .choice-button{
-      margin:0;
-      height: 3rem;
-      width:max-content;
-      font-size: medium;
-    }
-    
-
-  </style>
+  <link rel="stylesheet" href="language-gender.css">
 </head>
 
-<body></body>
+<body>
+</body>
+
 
 <script>
-  
     var jsPsych = initJsPsych({
     show_progress_bar: true, // Enable progress bar
     auto_update_progress_bar: true, // Automatically update progress bar
   });
 
+  
+  var filenamesArray;
+  var filepatharray;
+  async function getFilenamesArray() {
+    try {
+        const response = await fetch('/get-filenames');
+        const response2 = await(fetch('/get-image-paths'))
+        if (!response.ok) {
+            throw new Error('Failed to fetch filenames');
+        }
+        filenamesArray = await response.json();
+        filepatharray = await response2.json();
+
+        return filenamesArray;
+    } catch (error) {
+        console.error('Error:', error);
+        return []; // Return an empty array on error
+    }
+}
+  
+getFilenamesArray().then(function() {
+  console.log(filepatharray);
   function sendtoServer(data){
+    var prolificPID = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    var studyID = jsPsych.data.getURLVariable('STUDY_ID');
+    var sessionID = jsPsych.data.getURLVariable('SESSION_ID');
+
+    let URL_Data = {
+    prolificPID: prolificPID || 'Test_1',
+    studyID: studyID || 'Test_2',
+    sessionID: sessionID || 'Test_3'
+    };
+    fetch('/complete-experiment', {
+       method: 'POST',
+       headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(URL_Data) // Send the URL variables in the request body
+      })
+    .catch(error => console.error('Error completing experiment:', error));
+
       fetch('/submit-data', {
     method: 'POST', // Specifies that we are making a POST request
     headers: {
@@ -73,64 +83,95 @@
   /* create timeline */
   var timeline = [];
 
+
   /* preload images */
   var preload = {
     type: jsPsychPreload,
-    images: [
-      'img/table.jpg', 'img/cruise-ship.png', 'img/sun.jpg', 'img/moon.jpg',
-      'img/bridge.webp', 'img/car.jpg', 'img/cat.jpeg', 'img/chair.jpg',
-      'img/clock.jpg', 'img/cup.jpg', 'img/dog.jpg', 'img/flower.jpeg',
-      'img/house.jpg', 'img/pen.jpg', 'img/tree.jpeg', 'img/window.JPG'
-    ],
+    images: filepatharray,
   };
   timeline.push(preload);
 
   /* define trial stimuli array for timeline variables */
+  var myInput = `<div class="input-div"><input id='Table' class='user-input' placeholder='Enter the object in your language!'></div>`;
+  /*
   var test_stimuli = [
-    { stimulus: "img/table.jpg", prompt: 'Table' },
-    { stimulus: "img/cruise-ship.png", prompt: 'Cruise Ship' },
-    { stimulus: "img/sun.jpg", prompt: 'Sun' },
-    { stimulus: "img/moon.jpg", prompt: 'Moon' },
-    { stimulus: "img/car.jpg", prompt: 'Car' },
-    { stimulus: "img/cat.jpeg", prompt: 'Cat' },
-    { stimulus: "img/chair.jpg", prompt: 'Chair' },
-    { stimulus: "img/clock.jpg", prompt: 'Clock' },
-    { stimulus: "img/cup.jpg", prompt: 'Cup' },
-    { stimulus: "img/dog.jpg", prompt: 'Dog' },
-    { stimulus: "img/flower.jpeg", prompt: 'Flower' },
-    { stimulus: "img/house.jpg", prompt: 'House' },
-    { stimulus: "img/pen.jpg", prompt: 'Pen' },
-    { stimulus: "img/tree.jpeg", prompt: 'Tree' },
-    { stimulus: "img/window.JPG", prompt: 'Window' }
+    { stimulus: `${filepatharray[0]}`, prompt: `${filenamesArray[0]} ${myInput}`},
+    { stimulus: "img/cruise-ship.png", prompt: `${filenamesArray[1]} ${myInput}` },
+    { stimulus: "img/sun.jpg", prompt: `${filenamesArray[2]} ${myInput}` },
+    { stimulus: "img/moon.jpg", prompt: `${filenamesArray[3]} ${myInput}` },
+    { stimulus: "img/car.jpg", prompt: `${filenamesArray[4]} ${myInput}` },
+    { stimulus: "img/cat.jpeg", prompt: `${filenamesArray[5]} ${myInput}` },
+    { stimulus: "img/chair.jpg", prompt: `${filenamesArray[6]} ${myInput}` },
+    { stimulus: "img/clock.jpg", prompt: `${filenamesArray[7]} ${myInput}` },
+    { stimulus: "img/cup.jpg", prompt: `${filenamesArray[8]} ${myInput}` },
+    { stimulus: "img/dog.jpg", prompt: `${filenamesArray[9]} ${myInput}` },
+    { stimulus: "img/flower.jpeg", prompt: `${filenamesArray[10]} ${myInput}` },
+    { stimulus: "img/house.jpg", prompt: `${filenamesArray[11]} ${myInput}` },
+    { stimulus: "img/pen.jpg", prompt: `${filenamesArray[12]} ${myInput}` },
+    { stimulus: "img/tree.jpeg", prompt: `${filenamesArray[13]} ${myInput}` },
+    { stimulus: "img/window.JPG", prompt: `${filenamesArray[14]} ${myInput}` }
   ];
+  */
+  var test_stimuli = [];
+  for(let i=0; i<filenamesArray.length; i++){
+    test_stimuli.push({
+      stimulus: `${filepatharray[i]}`, prompt: `${filenamesArray[i]} ${myInput}`
+    })
+  }
+  var languageGenders;
 
+    // Fetch languages and populate the dropdown
+    function populateDropdown() {
+      fetch("languages.json")
+        .then(response => response.json())
+        .then(data => {
+          languageGenders = data;
+          var languages = Object.keys(languageGenders);
+          var dropdown = document.getElementById('languages');
+          for (let i = 0; i < languages.length; i++) {
+            var option = document.createElement('option');
+            option.value = languages[i];
+            option.textContent = languages[i];
+            dropdown.appendChild(option);
+          }
+        });
+    }
+
+  /*
   var languageGenders = {
     "English": ["Masculine", "Feminine", "Neuter"],
     "French": ["Masculine", "Feminine"],
     "Arabic": ["Masculine", "Feminine"],
     "Urdu": ["Masculine", "Feminine"]
   };
+  */
 
   var languageSelected = "None";
 
+  var instructions;
+
   /* define instructions trial */
   function startMenu() {
-    var instructions = {
+    
+    instructions = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p class="start-para">In this experiment, you will be shown various objects and asked to select their language gender. Please read the instructions carefully and select the appropriate gender for each object. Thank you for participating!</p>
+      <div class="start-para">
+        <strong>Welcome to the Language Gender Experiment!</strong>
+        <p>In this experiment, you will be shown various objects. For each object:</p>
+        <p><strong>1. Enter the name </strong> that you think matches the object in your language. </p>
+        <p><strong>2. Select the grammatical gender  </strong> (Masculine, Feminine, Neuter) that best fits the object in your language. </p>
+        <em class="italic"> Select your language below </em>
+      </div>
         <div>
-          <select name="languages" class="jspsych-btn" id="languages">
-            <option value="English">English</option>
-            <option value="French">French</option>
-            <option value="Arabic">Arabic</option>
-            <option value="Urdu">Urdu</option>
+          <select name="languages" class="dropdown jspsych-btn" id="languages">
           </select>
         </div>
       `,
       choices: ['Start'],
       button_html: ['<button class="jspsych-btn start-button" id="start-btn">%choice%</button>'],
       on_load: function() {
+        populateDropdown();
         document.getElementById('start-btn').addEventListener('click', function() {
           languageSelected = document.getElementById('languages').value;
           document.body.innerHTML = ''; // Clear the instructions from the body
@@ -142,12 +183,13 @@
           else{
             height=300
           }
-         
-          
-          
+
+                    
           // Create and display the questions
           function CreateAndDisplayQuestion() {
             var languageGenderArray = languageGenders[languageSelected];
+            var userInput;
+
             var question = {
               type: jsPsychImageButtonResponse,
               stimulus: jsPsych.timelineVariable('stimulus'),
@@ -162,12 +204,69 @@
               </div>
               `),
               data: {
-                selected_gender: "Male",
+                user_input: "Empty",
+                selected_gender: "",
                 choices: languageGenderArray.concat(['None'])
               },
 
+              on_load: function(){
+                
+                //Swapping the Positions for the Choice DIV and Input DIV
+
+                //Copying the Inner Text Value of the js-psych-content class
+                myText = document.querySelector('.jspsych-content').innerText;
+                var MCQ = document.getElementById('jspsych-image-button-response-btngroup').innerText;
+
+                // Remove the MCQ part from myText
+                var myText = myText.replace(MCQ, '').trim();   
+                console.log(myText)  
+                
+            
+                // Get the input-div and button group elements
+                var inputDiv = document.querySelector('.input-div');
+                var btnGroupDiv = document.getElementById('jspsych-image-button-response-btngroup');
+
+                // Move the input-div before the button group
+                if (inputDiv && btnGroupDiv) {
+                  btnGroupDiv.parentNode.insertBefore(inputDiv, btnGroupDiv);
+                }
+
+                var promptDiv = document.createElement('div');
+                promptDiv.innerText = myText;
+
+                   // Insert the new prompt div above the input box
+                  var inputDiv = document.querySelector('.input-div');
+                  if (inputDiv) {
+                      inputDiv.parentNode.insertBefore(promptDiv, inputDiv);
+                  }
+                
+                // Bringing the Prompt from the bottom to the Top
+                
+                var mainDiv = document.querySelector('.jspsych-content');
+                var children = [];
+                for(var i=0; i<mainDiv.children.length; i++) {
+                  children.push(mainDiv.children[i]);
+                }
+
+                mainDiv.innerHTML = "";
+                children.forEach(function(item) {
+                  mainDiv.appendChild(item);
+                });
+
+
+
+                //Adding an Event Listener
+                document.querySelector('.jspsych-btn').addEventListener('click', function(){
+                userInput =  document.getElementById('Table').value;
+                })
+                
+              },
+              
               on_finish: function(data) {
+                var inputElement = document.getElementById('Table');
                 data.selected_gender = data.choices[data.response];
+                data.user_input = userInput; // 
+              
               }
             };
 
@@ -185,22 +284,33 @@
             show_progress_bar: true, // Enable progress bar
             auto_update_progress_bar: true, // Automatically update progress bar
             on_finish: function() {
-            jsPsych.data.displayData();
-            console.log(jsPsych.data.get().json())
             sendtoServer(jsPsych.data.get().json());
+            window.location.replace('http://localhost:3000/thankyou-screen.html');
+            
             
     }
   })
 
           jsPsych.run(timeline);
+          
         });
       }
     };
 
     jsPsych.run([instructions]);
+    
   }
 
   startMenu();
-</script>
+
+
+
+}).catch(error => {
+    console.error('Error:', error);
+});
+
+
+
+  </script>
 
 </html>

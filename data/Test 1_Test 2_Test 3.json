@@ -1,0 +1,317 @@
+[
+  {
+    "success": true,
+    "timeout": false,
+    "failed_images": [],
+    "failed_audio": [],
+    "failed_video": [],
+    "trial_type": "preload",
+    "trial_index": 0,
+    "plugin_version": "2.0.0",
+    "time_elapsed": 33
+  },
+  {
+    "user_input": "",
+    "selected_gender": "S",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 7090,
+    "stimulus": "img/apple.jpg",
+    "response": 0,
+    "trial_type": "image-button-response",
+    "trial_index": 1,
+    "plugin_version": null,
+    "time_elapsed": 7125
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 757,
+    "stimulus": "img/book.webp",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 2,
+    "plugin_version": null,
+    "time_elapsed": 7884
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 142,
+    "stimulus": "img/bottle.jpeg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 3,
+    "plugin_version": null,
+    "time_elapsed": 8027
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 126,
+    "stimulus": "img/bridge.webp",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 4,
+    "plugin_version": null,
+    "time_elapsed": 8154
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 135,
+    "stimulus": "img/car.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 5,
+    "plugin_version": null,
+    "time_elapsed": 8290
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 127,
+    "stimulus": "img/cat.jpeg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 6,
+    "plugin_version": null,
+    "time_elapsed": 8418
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 136,
+    "stimulus": "img/chair.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 7,
+    "plugin_version": null,
+    "time_elapsed": 8554
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 135,
+    "stimulus": "img/clock.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 8,
+    "plugin_version": null,
+    "time_elapsed": 8690
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 143,
+    "stimulus": "img/cruise-ship.png",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 9,
+    "plugin_version": null,
+    "time_elapsed": 8834
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 126,
+    "stimulus": "img/cup.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 10,
+    "plugin_version": null,
+    "time_elapsed": 8962
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 151,
+    "stimulus": "img/dog.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 11,
+    "plugin_version": null,
+    "time_elapsed": 9114
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 127,
+    "stimulus": "img/flower.jpeg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 12,
+    "plugin_version": null,
+    "time_elapsed": 9242
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 152,
+    "stimulus": "img/house.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 13,
+    "plugin_version": null,
+    "time_elapsed": 9394
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 143,
+    "stimulus": "img/moon.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 14,
+    "plugin_version": null,
+    "time_elapsed": 9538
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 135,
+    "stimulus": "img/pen.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 15,
+    "plugin_version": null,
+    "time_elapsed": 9674
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 143,
+    "stimulus": "img/sun.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 16,
+    "plugin_version": null,
+    "time_elapsed": 9818
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 144,
+    "stimulus": "img/table.jpg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 17,
+    "plugin_version": null,
+    "time_elapsed": 9962
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 159,
+    "stimulus": "img/tree.jpeg",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 18,
+    "plugin_version": null,
+    "time_elapsed": 10122
+  },
+  {
+    "user_input": "",
+    "selected_gender": "P",
+    "choices": [
+      "S",
+      "P",
+      "None"
+    ],
+    "rt": 127,
+    "stimulus": "img/window.JPG",
+    "response": 1,
+    "trial_type": "image-button-response",
+    "trial_index": 19,
+    "plugin_version": null,
+    "time_elapsed": 10250
+  }
+]

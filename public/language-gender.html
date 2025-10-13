@@ -191,22 +191,36 @@
                       choices: languageGenderArray.concat(["None"]),
                     },
                     on_load: function () {
-                      const inputDiv = document.querySelector(".input-div");
-                      const btnGroupDiv = document.getElementById(
-                        "jspsych-image-button-response-btngroup"
-                      );
-                      if (inputDiv && btnGroupDiv) {
-                        btnGroupDiv.parentNode.insertBefore(
-                          inputDiv,
-                          btnGroupDiv
-                        );
-                      }
-                    },
-                    on_finish: function (data) {
-                      data.selected_gender = data.choices[data.response];
-                      data.user_input =
-                        document.getElementById("Table")?.value || "";
-                    },
+  const inputDiv = document.querySelector(".input-div");
+  const btnGroupDiv = document.getElementById(
+    "jspsych-image-button-response-btngroup"
+  );
+
+  if (inputDiv && btnGroupDiv) {
+    btnGroupDiv.parentNode.insertBefore(inputDiv, btnGroupDiv);
+  }
+
+  // capture value at the moment the participant clicks
+  const inputField = document.getElementById("Table");
+  const buttons = document.querySelectorAll(".jspsych-btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const val = inputField ? inputField.value.trim() : "";
+      // store the current text value directly in this trial’s data
+      jsPsych.getCurrentTrial().data.user_input = val;
+      console.log("💾 Captured input:", val);
+    });
+  });
+},
+
+on_finish: function (data) {
+  data.selected_gender = data.choices[data.response];
+  if (!data.user_input) {
+    data.user_input = "No Input";
+  }
+},
+
                   };
 
                   const question_timeline = {

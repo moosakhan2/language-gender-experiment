@@ -159,7 +159,6 @@ Each participant’s data is saved under `responses/` in your Firebase Storage a
 
 ---
 
-## Credits
 
 ✅ This project is designed for **open, reproducible linguistic research**.  
 Fork, adapt, and deploy your own version easily!

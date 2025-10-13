@@ -1,2 +1,22 @@
+# Firebase & Node
+node_modules/
+firebase-debug.log
+firebase-debug.*
+functions/node_modules/
+
+# Local data / build
+data/
+dist/
+tmp/
 .env
-.env
+.env.*
+.secret.key
+
+# OS
+.DS_Store
+
+# jsPsych auto outputs
+public/images.json
+
+# Service keys (never commit)
+serviceAccountKey.json

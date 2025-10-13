@@ -106,18 +106,24 @@
     <p class="error-message"></p>
 
     <script>
-      function checkConsent(){
-        if(document.getElementById('consent').checked){
-          console.log("Checked")
-          window.location.replace('http://localhost:3000/language-gender.html');
-        }
-        else{
-          document.querySelector('.error-message').innerHTML = `
-            <p class="consent-text error">Please check the box to continue </p>
-          `
-        }
-      }
-    </script>
+function checkConsent() {
+  const consentBox = document.getElementById('consent');
+  const errorBox = document.querySelector('.error-message');
+
+  if (consentBox.checked) {
+    console.log("Checked");
+    // preserve any Prolific URL parameters
+    const params = window.location.search;
+    // navigate to the hosted version of the next page (relative path)
+    window.location.replace('language-gender.html' + params);
+  } else {
+    errorBox.innerHTML = `
+      <p class="consent-text error">Please check the box to continue.</p>
+    `;
+  }
+}
+</script>
+
   </div>
 
  

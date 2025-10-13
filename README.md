@@ -6,13 +6,13 @@ Responses are securely stored in **Firebase Storage** for later analysis.
 
 ---
 
-## 🧠 Overview
+## Overview
 
 This web app allows researchers to **collect and analyze** how people assign gender to nouns across different languages.
 
 ---
 
-## 🧩 Tech Stack
+## Tech Stack
 
 - **Frontend:** HTML, JavaScript (**jsPsych 8.0.0**)  
 - **Backend:** Firebase Cloud Functions (**Node.js 22**)  
@@ -24,7 +24,7 @@ Each participant’s data (including language responses, gender selections, and 
 
 ---
 
-## 🚀 How to Use
+## How to Use
 
 ### ➕ Add More Languages
 
@@ -44,7 +44,7 @@ Each participant’s data (including language responses, gender selections, and 
 
 ---
 
-### 🖼️ Add More Images
+### Add More Images
 
 1. Add your new image files to `public/img/`.
 
@@ -66,7 +66,7 @@ Each participant’s data (including language responses, gender selections, and 
 
 ---
 
-## ☁️ Cloning Into Your Own Firebase Project
+## Cloning Into Your Own Firebase Project
 
 ### 1. Clone the Repository
 
@@ -145,24 +145,21 @@ Each participant’s data is saved under `responses/` in your Firebase Storage a
 
 ---
 
-## 💡 Ideas for Analysis
+## Ideas for Analysis
 
-### 🗣️ Linguistic & NLP Research
+### Linguistic & NLP Research
 - Predict grammatical gender from morphology or phonetic patterns  
 - Compare gender assignment across languages
 
-### 🧠 Cognitive Modeling
+### Cognitive Modeling
 - Study reaction times (`rt`) to measure decision speed in language processing
 
-### 🤖 Machine Learning Applications
+### Machine Learning Applications
 - Train models on multilingual gender data to explore biases or grammar rules
 
 ---
 
-## 👩‍💻 Credits
-
-Developed by **Moosa Khan**  
-Built with **jsPsych**, **Firebase**, and **Prolific** integration for participant data collection.
+## Credits
 
 ✅ This project is designed for **open, reproducible linguistic research**.  
 Fork, adapt, and deploy your own version easily!

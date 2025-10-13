@@ -117,7 +117,7 @@ firebase deploy
 Access your live URL:
 
 ```
-https://your-project-name.web.app/language-gender.html
+https://your-project-name.web.app/consent-page.html
 ```
 
 ---

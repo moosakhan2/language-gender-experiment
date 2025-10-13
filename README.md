@@ -102,7 +102,7 @@ In `functions/index.js`, replace the storage bucket name with your own:
 
 ```js
 initializeApp({
-  storageBucket: "YOUR_FIREBASE_BUCKET_NAME",
+  storageBucket: "language-gender-experiment.firebasestorage.app",
 });
 ```
 

@@ -71,7 +71,7 @@ Each participant’s data (including language responses, gender selections, and 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/language-gender-experiment.git](https://github.com/moosakhan2/language-gender-experiment
+git clone https://github.com/moosakhan2/language-gender-experiment.git
 cd language-gender-experiment
 ```
 
